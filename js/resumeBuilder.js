@@ -10,7 +10,7 @@ var bio =
             "location":"Shaoxing"
         },
     "skill":["HTML","CSS","JavaScript","Python"],
-    "bioPic":"image/fry.jpg"
+    "bioPic":"images/fry.jpg"
 };
 
 var education =
@@ -49,47 +49,46 @@ var project =
 };
 
 var work =
-{
-    "PartTime":
-    [
-        {
-            "company":"Subway",
-                "position":"Marketing Trainee",
-            "time":"7/2015-9/2015",
-            "description":[
-                "Achieved high customer satisfaction due to excellent service",
-                "Increased revenue"
-                ]
-        }
-    ],
-    "Internship":
-    [
-        {
-            "company":"Zhongyu Real Estate Ltd.",
-            "position":"Accountant",
-            "time":"7/2014-9/2014",
-            "description":
-                [
-                "Organised and input everyday income and expenses",
-                "Prepared documents for loan application"
-                ]
-        },
-        {
-            "company":"Aiku Garment Factory",
-            "position":"Order Coordinator",
-            "time":"7/2013-8/2013",
-            "description":
-                [
-                "Allocated orders from America and Africa",
-                "Scheduled meetings between the director and trading partners",
-                "Translated documents"
-                ]
-        }
-    ]
-}
+[
+    {
+        "employer":"Subway",
+        "title":"Marketing Trainee",
+        "time":"7/2015-9/2015",
+        "description":[
+            "Achieved high customer satisfaction due to excellent service",
+            "Increased revenue"
+            ]
+    },
+    {
+        "employer":"Zhongyu Real Estate Ltd.",
+        "title":"Accountant",
+        "time":"7/2014-9/2014",
+        "description":[
+            "Organised and input everyday income and expenses",
+            "Prepared documents for loan application"
+            ]
+    },
+    {
+        "employer":"Aiku Garment Factory",
+        "title":"Order Coordinator",
+        "time":"7/2013-8/2013",
+        "description":[
+            "Allocated orders from America and Africa",
+            "Scheduled meetings between the director and trading partners",
+            "Translated documents"
+            ]
+    }
+];
+
+
+
+
+$("#header").prepend(HTMLheaderName.replace("%data%",bio.name));
+$("#header").append(HTMLbioPic.replace("%data%",bio.bioPic));
 
 if (bio.skill.length > 0){
     $("#header").append(HTMLskillsStart);
+
     var formattedSkill = HTMLskills.replace("%data%",bio.skill[0]);
     $("#skills").append(formattedSkill);
     formattedSkill = HTMLskills.replace("%data%",bio.skill[1]);
@@ -98,7 +97,27 @@ if (bio.skill.length > 0){
     $("#skills").append(formattedSkill);
     formattedSkill = HTMLskills.replace("%data%",bio.skill[3]);
     $("#skills").append(formattedSkill);
-}
+};
+
+
+
+for (experience in work)
+{
+    $("#workExperience").append(HTMLworkStart);
+
+    var formattedEmployer = HTMLworkEmployer.replace("%data%",work[experience].employer);
+    var formattedTitle = HTMLworkTitle.replace("%data%",work[experience].title);
+    var formattedEmployerTitle = formattedEmployer + formattedTitle;
+    var formattedDates = HTMLworkDates.replace("%data%",work[experience].time);
+    var formattedDescription = HTMLworkDescription.replace("%data%",work[experience].description);
+
+    $(".work-entry:last").append(formattedEmployerTitle);
+    $(".work-entry:last").append(formattedDates);
+    $(".work-entry:last").append(formattedDescription);
+
+};
+
+
 
 
 
